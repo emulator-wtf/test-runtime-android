@@ -7,11 +7,6 @@ android {
     namespace = "wtf.emulator.observer.itf"
     compileSdk = 34
 
-    aidlPackagedList(
-        "wtf.emulator.observer.DescriptionWrapper",
-        "wtf.emulator.observer.RemoteRunListenerService",
-    )
-
     defaultConfig {
         minSdk = 21
     }

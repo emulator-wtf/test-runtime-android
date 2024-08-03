@@ -12,6 +12,7 @@ import android.os.IBinder;
 import org.junit.runner.notification.RunListener;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import wtf.emulator.observer.RemoteRunListenerService;
 
@@ -31,9 +32,16 @@ final class RunListenerServiceConnection extends RunListener implements ServiceC
         Intent intent = new Intent();
         intent.setComponent(new ComponentName("wtf.emulator.observer", "wtf.emulator.observer.RunListenerService"));
 
-        boolean bindResult = context.bindService(intent, this, Context.BIND_AUTO_CREATE);
-        if (!bindResult) {
-            loge("Failed to bind to RunListenerService");
+        logd("Binding to RunListenerService");
+        try {
+            boolean bindResult = context.bindService(intent, this, Context.BIND_AUTO_CREATE);
+            if (!bindResult) {
+                loge("Failed to bind to RunListenerService");
+                runListenerService = NO_OP_SERVICE;
+                serviceConnectionLatch.countDown();
+            }
+        } catch (Exception e) {
+            loge("Failed to bind to service", e);
             runListenerService = NO_OP_SERVICE;
             serviceConnectionLatch.countDown();
         }
@@ -71,8 +79,12 @@ final class RunListenerServiceConnection extends RunListener implements ServiceC
     }
 
     public RemoteRunListenerService awaitService() {
+        logd("Waiting for service connection");
         try {
-            serviceConnectionLatch.await();
+            boolean timeout = !serviceConnectionLatch.await(5, TimeUnit.SECONDS);
+            if (!timeout) {
+                loge("Timeout reached while waiting for service connection");
+            }
         } catch (InterruptedException e) {
             loge("Interrupted while waiting for service connection");
         }

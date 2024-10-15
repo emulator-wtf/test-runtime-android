@@ -7,7 +7,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
+
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.runner.notification.RunListener;
 
@@ -28,6 +31,17 @@ final class RunListenerServiceConnection extends RunListener implements ServiceC
     }
 
     public void bindToService() {
+        Bundle instrumentationArguments = InstrumentationRegistry.getArguments();
+
+        // go to NO_OP if we're running for orchestrator test collection
+        String listTestsForOrchestrator = instrumentationArguments.getString("listTestsForOrchestrator");
+        if ("true".equals(listTestsForOrchestrator)) {
+            logd("AJUR is collecting tests for orchestrator, skipping run listener");
+            runListenerService = NO_OP_SERVICE;
+            serviceConnectionLatch.countDown();
+            return;
+        }
+
         Intent intent = new Intent();
         intent.setComponent(new ComponentName("wtf.emulator.observer", "wtf.emulator.observer.RunListenerService"));
 

@@ -22,6 +22,6 @@ androidTestImplementation("wtf.emulator:test-runtime-android:0.2.0")
 
 Add the following to your `build.gradle` file(s):
 
-```kotlin
+```groovy
 androidTestImplementation 'wtf.emulator:test-runtime-android:0.2.0'
 ```

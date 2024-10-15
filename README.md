@@ -15,7 +15,7 @@ to enable per-test video captures.
 Add the following to your `build.gradle.kts` file(s):
 
 ```kotlin
-androidTestImplementation("wtf.emulator:test-runtime-android:0.2.0")
+androidTestImplementation("wtf.emulator:test-runtime-android:0.2.1")
 ```
 
 ### With Gradle/Groovy (`build.gradle`)
@@ -23,5 +23,5 @@ androidTestImplementation("wtf.emulator:test-runtime-android:0.2.0")
 Add the following to your `build.gradle` file(s):
 
 ```groovy
-androidTestImplementation 'wtf.emulator:test-runtime-android:0.2.0'
+androidTestImplementation 'wtf.emulator:test-runtime-android:0.2.1'
 ```

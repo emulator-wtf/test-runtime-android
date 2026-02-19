@@ -1,11 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("com.vanniktech.maven.publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.maven.publish)
 }
 
 android {
     namespace = "wtf.emulator"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
@@ -17,9 +17,14 @@ android {
     }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 dependencies {
     implementation(project(":observer-interface"))
-    implementation("junit:junit:4.13.2")
-    //noinspection GradleDependency - we don't want to force downstream upgrades
-    implementation("androidx.test:monitor:1.1.0")
+    implementation(fixed.junit)
+    implementation(fixed.androidx.test.monitor)
 }

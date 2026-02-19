@@ -1,0 +1,9 @@
+# version catalogue for dependencies we don't want to regularly update
+[libraries]
+
+# noinspection GradleDependency - we don't want to force downstream upgrades for androidx.annotation
+androidx-annotation = "androidx.annotation:annotation:1.0.1"
+# noinspection GradleDependency
+androidx-test-monitor = "androidx.test:monitor:1.1.0"
+# noinspection GradleDependency
+junit = "junit:junit:4.13.2"

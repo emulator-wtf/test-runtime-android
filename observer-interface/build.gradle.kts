@@ -1,11 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("com.vanniktech.maven.publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.maven.publish)
 }
 
 android {
     namespace = "wtf.emulator.observer.itf"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
@@ -21,9 +21,15 @@ android {
     }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+
 dependencies {
-    api("com.google.auto.value:auto-value-annotations:1.10.4")
-    //noinspection GradleDependency - we don't want to force downstream upgrades
-    api("androidx.annotation:annotation:1.0.0")
-    annotationProcessor("com.google.auto.value:auto-value:1.10.4")
+    api(libs.autovalue.annotations)
+    api(fixed.androidx.annotation)
+    annotationProcessor(libs.autovalue.processor)
 }

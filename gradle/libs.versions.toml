@@ -1,0 +1,14 @@
+[versions]
+# plugins
+agp = "9.0.1"
+maven-publish = "0.30.0"
+# libraries
+autovalue = "1.11.1"
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+
+[libraries]
+autovalue-annotations = { module = "com.google.auto.value:auto-value-annotations", version.ref = "autovalue" }
+autovalue-processor = { module = "com.google.auto.value:auto-value", version.ref = "autovalue" }

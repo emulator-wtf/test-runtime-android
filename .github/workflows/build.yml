@@ -16,6 +16,6 @@ jobs:
           distribution: 'zulu'
           java-version: '25'
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
       - name: Build with Gradle
         run: ./gradlew build

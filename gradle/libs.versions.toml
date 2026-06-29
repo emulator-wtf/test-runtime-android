@@ -1,7 +1,7 @@
 [versions]
 # plugins
 agp = "9.2.1"
-maven-publish = "0.30.0"
+maven-publish = "0.37.0"
 # libraries
 autovalue = "1.11.1"
 
